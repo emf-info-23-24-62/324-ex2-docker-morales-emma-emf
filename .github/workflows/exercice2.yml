@@ -2,8 +2,7 @@ name: Build & Push Docker image to ACR
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
   workflow_dispatch:
 
 env:
@@ -11,9 +10,31 @@ env:
   IMAGE_NAME: notes-backend-emma
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+
+      - name: Install
+        working-directory: app
+        run: npm ci
+
+      - name: Lint
+        working-directory: app
+        run: npm run lint
+
   build-docker:
     runs-on: ubuntu-latest
     environment: ACR
+    needs: lint
 
     steps:
       - name: Check out Git repository
