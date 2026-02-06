@@ -5,10 +5,12 @@
   "type": "commonjs",
   "scripts": {
     "start": "node server.js",
-   "lint": "npx eslint ."
-
+    "lint": "npx eslint ."
   },
   "dependencies": {
     "express": "^4.22.1"
+  },
+  "devDependencies": {
+    "eslint": "^9.39.2"
   }
 }
