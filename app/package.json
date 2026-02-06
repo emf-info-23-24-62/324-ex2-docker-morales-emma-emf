@@ -5,7 +5,7 @@
   "type": "commonjs",
   "scripts": {
     "start": "node server.js",
-   "lint": "eslint ."
+   "lint": "npx eslint ."
 
   },
   "dependencies": {
